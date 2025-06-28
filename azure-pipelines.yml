@@ -1,0 +1,37 @@
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  AWS_REGION: 'ap-south-1'
+  S3_BUCKET_NAME: 'staticwebhoistingdemo'
+
+steps:
+# ✅ Install Terraform
+
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+# ✅ Terraform Init
+- script: terraform init
+  displayName: 'Terraform Init'
+  workingDirectory: main.tf
+
+# ✅ Terraform Apply
+- script: terraform apply -auto-approve
+  displayName: 'Terraform Apply'
+  workingDirectory: main.tf
+
+# ✅ Install AWS CLI (uses Python)
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- script: pip install awscli
+  displayName: 'Install AWS CLI'
+
+# ✅ Sync Website Files to S3
+- script: |
+    aws s3 sync website/ s3://$(S3_BUCKET_NAME) --delete --acl public-read --region $(AWS_REGION)
+  displayName: 'Upload to S3 via AWS CLI'
