@@ -7,3 +7,5 @@ Earlier we cause conflict, does again testing to push this latest updated file t
 To test if single command is use to push/pull content to both repos(i.e., github and azure devops repos)
 
 Rechecking the same above thing.
+
+Now checking with linux system.
