@@ -1,1 +1,3 @@
 To test connection between linux local system to the azure devops repo
+
+After performing some changes it working fine. I able to connect azure devops repo to both windows and linux.
