@@ -41,6 +41,10 @@ resource "aws_s3_object" "index" {
   # source_hash = filemd5("website/index.html") // filemd5() recalculates the hash of the file every time it's changed — forcing Terraform to re-upload.
 }
 
+output "s3_ip_address" {
+  value = aws_s3_bucket.staticweb.bucket_domain_name
+}
+
 resource "aws_s3_object" "error" {
   bucket = aws_s3_bucket.staticweb.id
   key = "error.html"
