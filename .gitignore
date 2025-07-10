@@ -6,3 +6,11 @@ crash.log
 demo.txt
 .terraform.lock.hcl
 *.tfstate.*
+
+# .gitignore
+
+# Ignore all Terraform-related generated files
+**/.terraform/
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup
